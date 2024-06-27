@@ -7,6 +7,7 @@
   import { getProviders } from '../utils'
   import Github from './providers/Github.svelte'
   import Google from './providers/Google.svelte'
+  import Custom from './providers/Custom.svelte'
 
   interface Provider {
     name: string
@@ -21,6 +22,10 @@
     {
       name: 'github',
       component: Github
+    },
+    {
+      name: 'custom',
+      component: Custom
     }
   ]
 

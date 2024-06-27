@@ -7,7 +7,7 @@
     "*build": "rm -rf ./dist && cross-env NODE_ENV=production webpack --stats-error-details && echo 'done'",
     "*bundle": "cp -r ../../server/front/bundle.js .",
     "bundle": "echo 'disabled'",
-    "*docker:build": "docker build --network=host -t hardcoreeng/tracker-front .",
+    "*docker:build": "docker build -t hardcoreeng/tracker-front .",
     "*docker:staging": "../../common/scripts/docker_tag.sh hardcoreeng/tracker-front staging",
     "*docker:push": "../../common/scripts/docker_tag.sh hardcoreeng/tracker-front",
     "analyze": "cross-env NODE_ENV=production webpack --json > stats.json",

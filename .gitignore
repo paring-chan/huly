@@ -92,3 +92,4 @@ tests/db_dump
 .build
 .format
 tools/apm/apm.js
+.env.local

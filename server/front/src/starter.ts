@@ -109,6 +109,8 @@ export function startFront (ctx: MeasureContext, extraConfig?: Record<string, st
   const brandingUrl = process.env.BRANDING_URL
 
   const disableEmailRegistration = process.env.DISABLE_EMAIL_REGISTRATION === 'true'
+  const customProviderLogoUrl = process.env.OAUTH2_PROVIDER_LOGO
+  const customProviderName = process.env.OAUTH2_PROVIDER_NAME
 
   setMetadata(serverToken.metadata.Secret, serverSecret)
 
@@ -126,7 +128,9 @@ export function startFront (ctx: MeasureContext, extraConfig?: Record<string, st
     collaboratorApiUrl,
     brandingUrl,
     previewConfig,
-    disableEmailRegistration
+    disableEmailRegistration,
+    customProviderLogoUrl,
+    customProviderName
   }
   console.log('Starting Front service with', config)
   const shutdown = start(ctx, config, SERVER_PORT, extraConfig)

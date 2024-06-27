@@ -121,6 +121,8 @@ interface Config {
   SIGN_URL?: string
   PRINT_URL?: string
   DISABLE_EMAIL_REGISTRATION: boolean
+  CUSTOM_PROVIDER_NAME?: string
+  CUSTOM_PROVIDER_LOGO_URL?: string
 }
 
 export interface Branding {
@@ -242,6 +244,8 @@ export async function configurePlatform() {
 
   setMetadata(login.metadata.AccountsUrl, config.ACCOUNTS_URL)
   setMetadata(login.metadata.DisableEmailRegistration, config.DISABLE_EMAIL_REGISTRATION)
+  setMetadata(login.metadata.CustomProviderName, config.CUSTOM_PROVIDER_NAME || 'Custom Provider')
+  setMetadata(login.metadata.CustomProviderLogoUrl, config.CUSTOM_PROVIDER_LOGO_URL)
   setMetadata(presentation.metadata.UploadURL, config.UPLOAD_URL)
   setMetadata(presentation.metadata.CollaboratorUrl, config.COLLABORATOR_URL)
   setMetadata(presentation.metadata.CollaboratorApiUrl, config.COLLABORATOR_API_URL)

@@ -131,7 +131,7 @@
 
   const disableEmailRegistration = getMetadata(login.metadata.DisableEmailRegistration)
 
-  $: loginState = caption === login.string.LogIn ? 'login' : caption === login.string.SignUp ? 'signup' : 'none'
+  $: loginState = caption === login.string.LogIn ? 'login' : disableEmailRegistration ? 'none' : caption === login.string.SignUp ? 'signup' : 'none'
 </script>
 
 <form

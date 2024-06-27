@@ -236,6 +236,8 @@ export function start (
     brandingUrl?: string
     previewConfig: string
     disableEmailRegistration: boolean
+    customProviderName?: string
+    customProviderLogoUrl?: string
   },
   port: number,
   extraConfig?: Record<string, string | undefined>
@@ -276,6 +278,8 @@ export function start (
       BRANDING_URL: config.brandingUrl,
       PREVIEW_CONFIG: config.previewConfig,
       DISABLE_EMAIL_REGISTRATION: config.disableEmailRegistration,
+      CUSTOM_PROVIDER_NAME: config.customProviderName,
+      CUSTOM_PROVIDER_LOGO_URL: config.customProviderLogoUrl,
       ...(extraConfig ?? {})
     }
     res.set('Cache-Control', cacheControlNoCache)

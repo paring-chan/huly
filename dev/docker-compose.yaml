@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 services:
   mongodb:
     image: 'mongo:7-jammy'
@@ -35,7 +35,7 @@ services:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
       - http.cors.enabled=true
-      - http.cors.allow-origin=http://localhost:8082      
+      - http.cors.allow-origin=http://localhost:8082
     healthcheck:
       interval: 20s
       retries: 10
@@ -43,11 +43,13 @@ services:
     restart: unless-stopped
   account:
     image: hardcoreeng/account
-    links:
+    depends_on:
       - mongodb
       - minio
     ports:
       - 3000:3000
+    env_file:
+      - .env.local
     environment:
       - SERVER_PORT=3000
       - SERVER_SECRET=secret
@@ -55,15 +57,17 @@ services:
       - TRANSACTOR_URL=ws://transactor:3333
       - ENDPOINT_URL=ws://localhost:3333
       - STORAGE_CONFIG=${STORAGE_CONFIG}
-      - FRONT_URL=http://front:8080
+      - FRONT_URL=http://localhost:8080
       - INIT_WORKSPACE=demo-tracker
       - MODEL_ENABLED=*
       - ACCOUNTS_URL=http://localhost:3000
       - DISABLE_EMAIL_REGISTRATION
     restart: unless-stopped
+    networks:
+      - default
   front:
     image: hardcoreeng/front
-    links:
+    depends_on:
       - mongodb
       - minio
       - elastic
@@ -71,6 +75,8 @@ services:
       - transactor
     ports:
       - 8087:8080
+    env_file:
+      - .env.local
     environment:
       - SERVER_PORT=8080
       - SERVER_SECRET=secret
@@ -90,7 +96,7 @@ services:
     restart: unless-stopped
   collaborator:
     image: hardcoreeng/collaborator
-    links:
+    depends_on:
       - mongodb
       - minio
       - transactor
@@ -125,7 +131,7 @@ services:
   #     - STORAGE_CONFIG=${STORAGE_CONFIG}
   transactor:
     image: hardcoreeng/transactor
-    links:
+    depends_on:
       - mongodb
       - elastic
       - minio

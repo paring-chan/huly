@@ -64,7 +64,8 @@ export default plugin(loginId, {
     LoginEndpoint: '' as Metadata<string>,
     LoginEmail: '' as Metadata<string>,
     OverrideLoginToken: '' as Metadata<string>, // debug purposes
-    OverrideEndpoint: '' as Metadata<string>
+    OverrideEndpoint: '' as Metadata<string>,
+    DisableEmailRegistration: '' as Metadata<boolean>
   },
   component: {
     LoginApp: '' as AnyComponent,

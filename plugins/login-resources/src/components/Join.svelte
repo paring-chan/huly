@@ -13,7 +13,7 @@
 // limitations under the License.
 -->
 <script lang="ts">
-  import { OK, setMetadata, Severity, Status } from '@hcengineering/platform'
+  import { getMetadata, OK, setMetadata, Severity, Status } from '@hcengineering/platform'
   import { fetchMetadataLocalStorage, getCurrentLocation, navigate, setMetadataLocalStorage } from '@hcengineering/ui'
 
   import { checkJoined, join, signUpJoin } from '../utils'
@@ -102,8 +102,10 @@
     func: () => (page = 'login')
   }
 
-  $: bottom = page === 'login' ? [signUpAction] : [loginJoinAction]
-  $: secondaryButtonLabel = page === 'login' ? login.string.SignUp : undefined
+  const disableEmailRegistration = getMetadata(login.metadata.DisableEmailRegistration)
+
+  $: bottom = disableEmailRegistration ? [] : page === 'login' ? [signUpAction] : [loginJoinAction]
+  $: secondaryButtonLabel = page === 'login' && !disableEmailRegistration ? login.string.SignUp : undefined
   $: secondaryButtonAction = () => {
     page = 'signUp'
   }

@@ -108,6 +108,8 @@ export function startFront (ctx: MeasureContext, extraConfig?: Record<string, st
 
   const brandingUrl = process.env.BRANDING_URL
 
+  const disableEmailRegistration = process.env.DISABLE_EMAIL_REGISTRATION === 'true'
+
   setMetadata(serverToken.metadata.Secret, serverSecret)
 
   const config = {
@@ -123,7 +125,8 @@ export function startFront (ctx: MeasureContext, extraConfig?: Record<string, st
     collaboratorUrl,
     collaboratorApiUrl,
     brandingUrl,
-    previewConfig
+    previewConfig,
+    disableEmailRegistration
   }
   console.log('Starting Front service with', config)
   const shutdown = start(ctx, config, SERVER_PORT, extraConfig)

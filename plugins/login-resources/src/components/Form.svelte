@@ -15,7 +15,7 @@
 -->
 <script lang="ts">
   import type { IntlString } from '@hcengineering/platform'
-  import { OK, Severity, Status, translate } from '@hcengineering/platform'
+  import { getMetadata, OK, Severity, Status, translate } from '@hcengineering/platform'
   import {
     Button,
     Label,
@@ -128,6 +128,9 @@
     loc.path.length = 2
     navigate(loc)
   }
+
+  const disableEmailRegistration = getMetadata(login.metadata.DisableEmailRegistration)
+
   $: loginState = caption === login.string.LogIn ? 'login' : caption === login.string.SignUp ? 'signup' : 'none'
 </script>
 
@@ -151,16 +154,18 @@
 >
   {#if loginState !== 'none'}
     <div class="flex-row-center caption">
-      <a
-        class="title"
-        class:selected={loginState === 'signup'}
-        href="."
-        on:click|preventDefault={() => {
-          if (loginState !== 'signup') goTab('signup')
-        }}
-      >
-        <Label label={login.string.SignUp} />
-      </a>
+      {#if !disableEmailRegistration}
+        <a
+          class="title"
+          class:selected={loginState === 'signup'}
+          href="."
+          on:click|preventDefault={() => {
+            if (loginState !== 'signup') goTab('signup')
+          }}
+        >
+          <Label label={login.string.SignUp} />
+        </a>
+      {/if}
       <a
         class="title"
         class:selected={loginState === 'login'}

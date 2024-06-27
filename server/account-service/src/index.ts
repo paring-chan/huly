@@ -83,11 +83,13 @@ export function serveAccount (
   const frontURL = process.env.FRONT_URL
   const productName = process.env.PRODUCT_NAME
   const lang = process.env.LANGUAGE ?? 'en'
+  const disableEmailRegistration = process.env.DISABLE_EMAIL_REGISTRATION === 'true'
 
   setMetadata(platform.metadata.locale, lang)
   setMetadata(account.metadata.ProductName, productName)
   setMetadata(account.metadata.SES_URL, ses)
   setMetadata(account.metadata.FrontURL, frontURL)
+  setMetadata(account.metadata.DisableEmailRegistration, disableEmailRegistration)
 
   setMetadata(serverToken.metadata.Secret, serverSecret)
 

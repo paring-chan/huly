@@ -298,6 +298,11 @@ module.exports = [
         changeOrigin: true,
         logLevel: 'debug'
       },
+      '/config.json': {
+        target: 'http://localhost:8087',
+        changeOrigin: true,
+        logLevel: 'debug'
+      }
     } : {
       '/account': {
         target: 'https://account.hc.engineering/',

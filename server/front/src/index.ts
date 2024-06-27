@@ -235,6 +235,7 @@ export function start (
     collaboratorApiUrl: string
     brandingUrl?: string
     previewConfig: string
+    disableEmailRegistration: boolean
   },
   port: number,
   extraConfig?: Record<string, string | undefined>
@@ -274,6 +275,7 @@ export function start (
       COLLABORATOR_API_URL: config.collaboratorApiUrl,
       BRANDING_URL: config.brandingUrl,
       PREVIEW_CONFIG: config.previewConfig,
+      DISABLE_EMAIL_REGISTRATION: config.disableEmailRegistration,
       ...(extraConfig ?? {})
     }
     res.set('Cache-Control', cacheControlNoCache)

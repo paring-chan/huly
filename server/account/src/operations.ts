@@ -567,6 +567,11 @@ export async function signUpJoin (
   last: string,
   inviteId: ObjectId
 ): Promise<WorkspaceLoginInfo> {
+  const disableEmailRegistration = getMetadata(accountPlugin.metadata.DisableEmailRegistration)
+  if (disableEmailRegistration === true) {
+    throw new PlatformError(new Status(Severity.ERROR, platform.status.Forbidden, {}))
+  }
+
   const email = cleanEmail(_email)
   console.log(`signup join:${email} ${first} ${last}`)
   const invite = await getInvite(db, inviteId)
@@ -673,6 +678,10 @@ export async function createAccount (
   first: string,
   last: string
 ): Promise<LoginInfo> {
+  const disableEmailRegistration = getMetadata(accountPlugin.metadata.DisableEmailRegistration)
+  if (disableEmailRegistration === true) {
+    throw new PlatformError(new Status(Severity.ERROR, platform.status.Forbidden, {}))
+  }
   const email = cleanEmail(_email)
   const sesURL = getMetadata(accountPlugin.metadata.SES_URL)
   const account = await createAcc(

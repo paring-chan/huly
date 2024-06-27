@@ -59,6 +59,7 @@ services:
       - INIT_WORKSPACE=demo-tracker
       - MODEL_ENABLED=*
       - ACCOUNTS_URL=http://localhost:3000
+      - DISABLE_EMAIL_REGISTRATION
     restart: unless-stopped
   front:
     image: hardcoreeng/front
@@ -85,6 +86,7 @@ services:
       - COLLABORATOR_API_URL=http://localhost:3078
       - STORAGE_CONFIG=${STORAGE_CONFIG}
       - BRANDING_URL=http://localhost:8087/branding.json
+      - DISABLE_EMAIL_REGISTRATION
     restart: unless-stopped
   collaborator:
     image: hardcoreeng/collaborator

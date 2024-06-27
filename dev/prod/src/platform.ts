@@ -120,6 +120,7 @@ interface Config {
   LIVEKIT_WS?: string
   SIGN_URL?: string
   PRINT_URL?: string
+  DISABLE_EMAIL_REGISTRATION: boolean
 }
 
 export interface Branding {
@@ -240,6 +241,7 @@ export async function configurePlatform() {
   }
 
   setMetadata(login.metadata.AccountsUrl, config.ACCOUNTS_URL)
+  setMetadata(login.metadata.DisableEmailRegistration, config.DISABLE_EMAIL_REGISTRATION)
   setMetadata(presentation.metadata.UploadURL, config.UPLOAD_URL)
   setMetadata(presentation.metadata.CollaboratorUrl, config.COLLABORATOR_URL)
   setMetadata(presentation.metadata.CollaboratorApiUrl, config.COLLABORATOR_API_URL)

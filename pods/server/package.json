@@ -19,7 +19,7 @@
     "docker:push": "../../common/scripts/docker_tag.sh hardcoreeng/transactor",
     "build:watch": "compile",
     "format": "format src",
-    "docker:tbuild": "docker build -t hardcoreeng/transactor . --platform=linux/amd64 && ../../common/scripts/docker_tag_push.sh hardcoreeng/transactor",
+    "docker:tbuild": "docker build --network=host -t hardcoreeng/transactor . --platform=linux/amd64 && ../../common/scripts/docker_tag_push.sh hardcoreeng/transactor",
     "test": "jest --passWithNoTests --silent --forceExit",
     "_phase:build": "compile transpile src",
     "_phase:test": "jest --passWithNoTests --silent --forceExit",
